@@ -6,8 +6,8 @@ const makeSut = () => {
   return { sut };
 };
 
-describe('UniqueIDService', () => {
-  describe('#generateUniqueIdWithPrefix', () => {
+describe(UniqueIDService.name, () => {
+  describe(UniqueIDService.prototype.generateUniqueIdWithPrefix.name, () => {
     it('should generate id when called with prefix', async () => {
       const { sut } = makeSut();
       const prefix = 'app';
