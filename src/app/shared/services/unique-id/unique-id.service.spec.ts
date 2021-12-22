@@ -27,5 +27,16 @@ describe(UniqueIDService.name, () => {
       }
       expect(ids.size).toBe(50);
     });
+
+    it('should return the number of generatedIds when called', () => {
+      const { sut } = makeSut();
+      const prefix = 'app';
+
+      sut.generateUniqueIdWithPrefix(prefix);
+      sut.generateUniqueIdWithPrefix(prefix);
+      const result = sut.getNumberOfGeneratedUniqueIds();
+
+      expect(result).toBe(2);
+    });
   });
 });
