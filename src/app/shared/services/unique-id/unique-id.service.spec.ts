@@ -8,13 +8,24 @@ const makeSut = () => {
 
 describe(UniqueIDService.name, () => {
   describe(UniqueIDService.prototype.generateUniqueIdWithPrefix.name, () => {
-    it('should generate id when called with prefix', async () => {
+    it('should generate id when called with prefix', () => {
       const { sut } = makeSut();
       const prefix = 'app';
 
-      const result = await sut.generateUniqueIdWithPrefix(prefix);
+      const result = sut.generateUniqueIdWithPrefix(prefix);
 
-      expect(result).toContain('app-');
+      expect(result.startsWith('app-')).toBeTrue();
+    });
+
+    it('should not generate duplicated IDs when called multiple times', () => {
+      const { sut } = makeSut();
+      const prefix = 'app';
+
+      const ids = new Set();
+      for (let i = 0; i < 50; i++) {
+        ids.add(sut.generateUniqueIdWithPrefix(prefix));
+      }
+      expect(ids.size).toBe(50);
     });
   });
 });
