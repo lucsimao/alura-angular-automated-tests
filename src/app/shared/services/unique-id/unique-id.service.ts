@@ -7,7 +7,7 @@ export class UniqueIDService {
 
   public generateUniqueIdWithPrefix(prefix: string): string {
     if (!prefix) {
-      throw Error('Prefix can not be empty');
+      throw new Error('Prefix can not be empty');
     }
     const uniqueId = this.generateUniqueId();
     this.numberOfGeneratedIds++;

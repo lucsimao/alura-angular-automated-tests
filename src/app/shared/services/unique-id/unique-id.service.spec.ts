@@ -38,5 +38,18 @@ describe(UniqueIDService.name, () => {
 
       expect(result).toBe(2);
     });
+
+    it('should throw when called with empty', () => {
+      const { sut } = makeSut();
+      const emptyValues = [null, undefined, ''];
+
+      const result = sut.generateUniqueIdWithPrefix;
+
+      emptyValues.forEach((emptyValue) => {
+        expect(() => result(emptyValue)).toThrow(
+          new Error('Prefix can not be empty')
+        );
+      });
+    });
   });
 });
