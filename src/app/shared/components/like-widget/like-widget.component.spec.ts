@@ -20,7 +20,7 @@ describe(LikeWidgetComponent.name, () => {
     expect(sut).toBeTruthy();
   });
 
-  it('should auto generate ID when id input property is missing', async () => {
+  it('should auto-generate ID during ngOnInit when (@Input id) is not assigned', async () => {
     const { sut, fixture } = await makeSut();
 
     fixture.detectChanges();
@@ -28,7 +28,7 @@ describe(LikeWidgetComponent.name, () => {
     expect(sut.id).toBeTruthy();
   });
 
-  it('should not generate ID when id input property is present', async () => {
+  it('should NOT auto-generate ID during ngOnInit when (@Input id) is assigned', async () => {
     const { sut, fixture } = await makeSut();
     const fakeId = 'any_id';
 
@@ -41,7 +41,7 @@ describe(LikeWidgetComponent.name, () => {
   });
 
   describe(LikeWidgetComponent.prototype.like.name, () => {
-    it('should trigger emission when called', async () => {
+    it('should trigger (@Output liked) when called', async () => {
       const { sut, fixture } = await makeSut();
       fixture.detectChanges();
       const emitSpy = spyOn(sut.liked, 'emit');
