@@ -7,17 +7,35 @@ const makeSut = async () => {
   await TestBed.configureTestingModule({
     imports: [LikeWidgetModule],
   }).compileComponents();
-  const sut = TestBed.createComponent(LikeWidgetComponent);
-
-  return { sut };
+  const component = TestBed.createComponent(LikeWidgetComponent);
+  const sut = component.componentInstance;
+  return { sut, component };
 };
 
 describe(LikeWidgetComponent.name, () => {
   it('should create component', async () => {
     const { sut } = await makeSut();
 
-    const instance = sut.componentInstance;
+    expect(sut).toBeTruthy();
+  });
 
-    expect(instance).toBeTruthy();
+  it('should auto generate ID when id input property is missing', async () => {
+    const { sut, component } = await makeSut();
+
+    component.detectChanges();
+
+    expect(sut.id).toBeTruthy();
+  });
+
+  it('should not generate ID when id input property is present', async () => {
+    const { sut, component } = await makeSut();
+    const fakeId = 'any_id';
+
+    sut.id = fakeId;
+    component.detectChanges();
+
+    const result = component.componentInstance.id;
+
+    expect(result).toBe('any_id');
   });
 });
