@@ -39,5 +39,19 @@ describe(PhotoFrameComponent.name, () => {
 
       expect(times).toBe(1);
     }));
+
+    it('Should trigger (@Output like) two times when called outside debounce time', fakeAsync(async () => {
+      const { sut, fixture } = await makeSut();
+      let times = 0;
+      sut.liked.subscribe(() => times++);
+      fixture.detectChanges();
+
+      sut.like();
+      tick(500);
+      sut.like();
+      tick(500);
+
+      expect(times).toBe(2);
+    }));
   });
 });
