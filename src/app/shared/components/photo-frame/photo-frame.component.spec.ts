@@ -1,4 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  tick,
+} from '@angular/core/testing';
 
 import { PhotoFrameComponent } from './photo-frame.component';
 import { PhotoFrameModule } from './photo-frame.module';
@@ -15,9 +20,24 @@ const makeSut = async () => {
 };
 
 describe(PhotoFrameComponent.name, () => {
-  it('Should create component', () => {
-    const sut = makeSut();
+  it('Should create component', async () => {
+    const { sut } = await makeSut();
 
     expect(sut).toBeTruthy();
+  });
+
+  describe(PhotoFrameComponent.prototype.like.name, () => {
+    it('Should trigger (@Output like) once when called multiple times within debounce time', fakeAsync(async () => {
+      const { sut, fixture } = await makeSut();
+      let times = 0;
+      sut.liked.subscribe(() => times++);
+      fixture.detectChanges();
+
+      sut.like();
+      sut.like();
+      tick(500);
+
+      expect(times).toBe(1);
+    }));
   });
 });
