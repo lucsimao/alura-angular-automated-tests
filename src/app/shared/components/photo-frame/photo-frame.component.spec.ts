@@ -67,5 +67,24 @@ describe(PhotoFrameComponent.name, () => {
 
       expect(element.textContent.trim()).toEqual('1');
     });
+
+    it('Should have arial-label with 0 (@Input likes)', async () => {
+      const { fixture } = await makeSut();
+      const element: HTMLElement = fixture.nativeElement.querySelector('span');
+      fixture.detectChanges();
+
+      expect(element.getAttribute('aria-label')).toBe('0 people liked');
+    });
+
+    it('Should update aria-label when (@Input likes) is incremented', async () => {
+      const { sut, fixture } = await makeSut();
+      const element: HTMLElement = fixture.nativeElement.querySelector('span');
+      fixture.detectChanges();
+
+      sut.likes++;
+      fixture.detectChanges();
+
+      expect(element.getAttribute('aria-label')).toBe('1 people liked');
+    });
   });
 });
