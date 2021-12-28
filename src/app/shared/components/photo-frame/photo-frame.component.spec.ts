@@ -101,5 +101,50 @@ describe(PhotoFrameComponent.name, () => {
       expect(element.getAttribute('src')).toBe(src);
       expect(element.getAttribute('alt')).toBe(description);
     });
+
+    it('Should display number of likes when clicked', fakeAsync(async (
+      done
+    ) => {
+      const { sut, fixture } = await makeSut();
+
+      const likeWidgetContainer: HTMLElement =
+        fixture.nativeElement.querySelector('.like-widget-container');
+      const counterElement: HTMLElement =
+        fixture.nativeElement.querySelector('.like-counter');
+
+      fixture.detectChanges();
+      sut.liked.subscribe(() => {
+        sut.likes++;
+      });
+      likeWidgetContainer.click();
+
+      tick(500);
+
+      fixture.detectChanges();
+      expect(counterElement.textContent.trim()).toBe('1');
+    }));
+
+    it('Should display number of likes when ENTER key is pressed', fakeAsync(async (
+      done
+    ) => {
+      const { sut, fixture } = await makeSut();
+
+      const likeWidgetContainer: HTMLElement =
+        fixture.nativeElement.querySelector('.like-widget-container');
+      const counterElement: HTMLElement =
+        fixture.nativeElement.querySelector('.like-counter');
+      const event = new KeyboardEvent('keyup', { key: 'Enter' });
+
+      fixture.detectChanges();
+      sut.liked.subscribe(() => {
+        sut.likes++;
+      });
+      likeWidgetContainer.dispatchEvent(event);
+
+      tick(500);
+
+      fixture.detectChanges();
+      expect(counterElement.textContent.trim()).toBe('1');
+    }));
   });
 });
