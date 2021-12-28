@@ -54,4 +54,18 @@ describe(PhotoFrameComponent.name, () => {
       expect(times).toBe(2);
     }));
   });
+
+  describe('Dom', () => {
+    it('Should display number of likes when (@Input likes) is incremented', async () => {
+      const { sut, fixture } = await makeSut();
+      const element: HTMLElement =
+        fixture.nativeElement.querySelector('.like-counter');
+      fixture.detectChanges();
+
+      sut.likes++;
+      fixture.detectChanges();
+
+      expect(element.textContent.trim()).toEqual('1');
+    });
+  });
 });
