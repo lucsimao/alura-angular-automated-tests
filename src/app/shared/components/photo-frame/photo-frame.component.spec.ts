@@ -86,5 +86,20 @@ describe(PhotoFrameComponent.name, () => {
 
       expect(element.getAttribute('aria-label')).toBe('1 people liked');
     });
+
+    it('Should display image with src and description when bound to properties', async () => {
+      const { sut, fixture } = await makeSut();
+      const description = 'any_description';
+      const src = 'http://any_site/img.jpg';
+      const element: HTMLImageElement =
+        fixture.nativeElement.querySelector('img');
+
+      sut.src = src;
+      sut.description = description;
+      fixture.detectChanges();
+
+      expect(element.getAttribute('src')).toBe(src);
+      expect(element.getAttribute('alt')).toBe(description);
+    });
   });
 });
