@@ -44,5 +44,16 @@ describe(ActionDirective.name, () => {
 
       expect(sut.hasEvent()).toBeTrue();
     });
+
+    it('Should (@Output appAction) emit with payload when clicked', async () => {
+      const { sut, fixture } = await makeSut();
+      const divElement: HTMLElement =
+        fixture.nativeElement.querySelector('.stub');
+      const event = new Event('click');
+
+      divElement.dispatchEvent(event);
+
+      expect(sut.hasEvent()).toBeTrue();
+    });
   });
 });
