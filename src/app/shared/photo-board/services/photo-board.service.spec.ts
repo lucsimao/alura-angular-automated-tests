@@ -34,6 +34,7 @@ describe(PhotoBoardService.name, () => {
       httpController.expectOne(mockData.api).flush(mockData.data);
       const photos = await promise;
 
+      httpController.verify();
       expect(photos[0].description).toBe('EXAMPLE 1');
       expect(photos[1].description).toBe('EXAMPLE 2');
     });
