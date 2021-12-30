@@ -47,8 +47,20 @@ describe(PhotoListComponent.name, () => {
       const board = fixture.nativeElement.querySelector('app-photo-board');
       const loader = fixture.nativeElement.querySelector('.loader');
 
-      expect(board).not.toBeNull();
-      expect(loader).toBeNull();
+      expect(board).withContext('Should display board').toBeTruthy();
+      expect(loader).withContext('Should not display loader').toBeNull();
+    });
+
+    it('Should display loader while waiting for data', async () => {
+      const { fixture, service } = await makeSut();
+
+      spyOn(service, 'getPhotos').and.returnValue(null);
+      fixture.detectChanges();
+      const board = fixture.nativeElement.querySelector('app-photo-board');
+      const loader = fixture.nativeElement.querySelector('.loader');
+
+      expect(loader).withContext('Should display loader').toBeTruthy();
+      expect(board).withContext('Should not display board').toBeNull();
     });
   });
 });
