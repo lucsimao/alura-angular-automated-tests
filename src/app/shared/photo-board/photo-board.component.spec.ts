@@ -28,7 +28,7 @@ const makeSut = async () => {
 };
 
 describe(PhotoBoardComponent.name, () => {
-  it('should display rows and colums when (@Input photos) has value', async () => {
+  it('Should display rows and columns when (@Input photos) has value', async () => {
     const { sut, fixture } = await makeSut();
     const photos = makePhotoList();
 
