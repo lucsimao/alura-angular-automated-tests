@@ -1,6 +1,46 @@
-# NgTest1
+# Automated Test Angular Course
 
-This project is the artifact of the course [Angular: Testes automatizados com Jasmine e Karma artifact](https://cursos.alura.com.br/course/angular-testes-automatizados-jasmin-karma)
+This project is the artifact of the course [Angular: Testes automatizados com Jasmine e Karma artifact](https://cursos.alura.com.br/course/angular-testes-automatizados-jasmin-karma) and
+[Angular: Avançando com testes automatizados](https://cursos.alura.com.br/course/angular-avancando-testes-automatizados)
+
+Content:
+
+- Angular Introduction
+  - Module
+  - Component
+  - Service
+- Pipe Async
+- Output and Input
+- Injectable
+- Data Binding
+  - Two Way Data Bind [()]
+  - Property Bind []
+  - Event Binding ()
+- Interpolation
+- NgFor
+- NgIf
+- HttpClient
+- RxJS (Reactive Extensions for JavaScript)
+  - Observable
+  - Subject
+- Jasmine
+  - Unit Tests
+  - Spy with jasmine
+- Mock Providers
+- Debouncing
+- Fake Async
+  - Tick
+- TestBed
+  - Fixtures
+    - DetectChanges
+    - SimpleChanges
+    - OnChanges
+  - Components
+  - NativeElement
+    - querySelector
+  - DebugElement
+- HostListener and Custom Directives
+- Accessibility Test
 
 ## Development server
 
