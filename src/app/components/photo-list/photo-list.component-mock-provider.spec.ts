@@ -1,11 +1,11 @@
-import { Observable, of } from 'rxjs';
-
 import { HttpClientModule } from '@angular/common/http';
 import { Photo } from './../../shared/photo-board/interfaces/photo';
+import { PhotoBoardMockService } from './../../shared/photo-board/services/photo-board-mock.service';
 import { PhotoBoardService } from './../../shared/photo-board/services/photo-board.service';
 import { PhotoListComponent } from './photo-list.component';
 import { PhotoListModule } from './photo-list.module';
 import { TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
 
 const makePhotoList = (): Photo[] => {
   const photos: Photo[] = [];
@@ -25,11 +25,7 @@ const makeSut = async () => {
     providers: [
       {
         provide: PhotoBoardService,
-        useValue: {
-          getPhotos(): Observable<Photo[]> {
-            return of(makePhotoList());
-          },
-        },
+        useClass: PhotoBoardMockService,
       },
     ],
   }).compileComponents();
